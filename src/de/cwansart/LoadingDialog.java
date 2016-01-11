@@ -1,6 +1,5 @@
 package de.cwansart;
 
-import java.awt.AWTError;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 
@@ -29,11 +29,10 @@ public class LoadingDialog extends JDialog {
 		try {
 			this.setVisible(true);
 			this.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
-			System.out.println("möp");
 			FileUtils.copyURLToFile(source, destination);
-			System.out.println("blub");
 			this.dispose();
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
 		}
 	}

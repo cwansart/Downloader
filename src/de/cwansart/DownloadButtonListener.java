@@ -41,6 +41,7 @@ public class DownloadButtonListener implements MouseListener {
 			loadingDialog.startDownload(source, destination);
 			
 		} catch (MalformedURLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
 		}
 	}
