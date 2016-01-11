@@ -1,5 +1,7 @@
 package de.cwansart;
 
+import java.awt.AWTError;
+import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +20,6 @@ public class LoadingDialog extends JDialog {
 		JLabel loadingLabel = new JLabel(loadingImage);
 		this.add(loadingLabel);
 		
-		this.setModal(true);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -26,7 +27,12 @@ public class LoadingDialog extends JDialog {
 
 	public void startDownload(URL source, File destination) {
 		try {
+			this.setVisible(true);
+			this.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+			System.out.println("möp");
 			FileUtils.copyURLToFile(source, destination);
+			System.out.println("blub");
+			this.dispose();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -38,10 +38,7 @@ public class DownloadButtonListener implements MouseListener {
 			File destination = new File(saveTextField.getText());
 			
 			LoadingDialog loadingDialog = new LoadingDialog();
-			loadingDialog.setVisible(true);
 			loadingDialog.startDownload(source, destination);
-			
-			loadingDialog.setVisible(false);
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
