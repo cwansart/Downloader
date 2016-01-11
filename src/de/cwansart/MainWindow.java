@@ -77,7 +77,7 @@ public class MainWindow extends JFrame {
 		downloadPanel.add(downloadButton);
 		this.add(downloadPanel);
 
-		downloadButton.addMouseListener(new DownloadButtonListener(this.urlTextField, this.saveTextField));
+		downloadButton.addMouseListener(new DownloadButtonListener(this, this.urlTextField, this.saveTextField));
 
 		this.pack();
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

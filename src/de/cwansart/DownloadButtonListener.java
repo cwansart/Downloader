@@ -13,8 +13,10 @@ public class DownloadButtonListener implements MouseListener {
 
 	private JTextField urlTextField;
 	private JTextField saveTextField;
+	private MainWindow parent;
 
-	public DownloadButtonListener(JTextField urlTextField, JTextField saveTextField) {
+	public DownloadButtonListener(MainWindow parent, JTextField urlTextField, JTextField saveTextField) {
+		this.parent = parent;
 		this.urlTextField = urlTextField;
 		this.saveTextField = saveTextField;
 	}
@@ -37,7 +39,7 @@ public class DownloadButtonListener implements MouseListener {
 			URL source = new URL(urlTextField.getText());
 			File destination = new File(saveTextField.getText());
 			
-			LoadingDialog loadingDialog = new LoadingDialog();
+			LoadingDialog loadingDialog = new LoadingDialog(parent);
 			loadingDialog.startDownload(source, destination);
 			
 		} catch (MalformedURLException e) {
