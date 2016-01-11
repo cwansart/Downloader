@@ -1,6 +1,11 @@
 package de.cwansart;
 
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -25,10 +30,24 @@ public class MainWindow extends JFrame {
 		this.setLayout(layout);
 
 		/* URL INPUT */
+		String clipboard = null;
+		try {
+			clipboard = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
+					.getData(DataFlavor.stringFlavor);
+		} catch (HeadlessException | UnsupportedFlavorException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		JPanel urlPanel = new JPanel();
 		urlPanel.setLayout(new BoxLayout(urlPanel, BoxLayout.LINE_AXIS));
 		JLabel urlLabel = new JLabel("URL");
 		this.urlTextField = new JTextField(20);
+		
+		if(clipboard != null) {
+			this.urlTextField.setText(clipboard);
+		}
+		
 		urlPanel.add(urlLabel);
 		urlPanel.add(Box.createHorizontalStrut(27));
 		urlPanel.add(urlTextField);
@@ -56,7 +75,7 @@ public class MainWindow extends JFrame {
 		JButton downloadButton = new JButton("Start download");
 		downloadPanel.add(downloadButton);
 		this.add(downloadPanel);
-		
+
 		downloadButton.addMouseListener(new DownloadButtonListener(this.urlTextField, this.saveTextField));
 
 		this.pack();
